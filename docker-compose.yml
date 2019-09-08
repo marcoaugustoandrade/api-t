@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mariadb
+    container_name: container-tarefas-mariadb
+    environment:
+    - MYSQL_ROOT_PASSWORD=Suporte99
+    - MYSQL_DATABASE=db_tarefas
+    - MYSQL_USER=suporte
+    - MYSQL_PASSWORD=Suporte99
+    ports:
+      - "3306:3306"
+    volumes:
+      # Dados
+      - ./database/data_mysql:/var/lib/mysql
+      # Arquivo SQL com schema
+      - ./database/database.sql:/docker-entrypoint-initdb.d/database.sql
+  # nodejs:
+  #   image: nodejs
+  #   container_name: container-tarefas-nodejs
+  #   build: .
+  #   command: npm start
+  #   ports:
+  #     - "3009:3009"
+  #   volumes:
+  #     - .:/user/app

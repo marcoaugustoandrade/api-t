@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "8cf7da46-f746-4f0c-a5be-4088b75730ca",
+		"name": "API-Tarefas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar todas as tarefas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "033325b9-f562-46e1-a57e-3700d9d333a0",
+						"exec": [
+							"tests[\"Status code retornado foi 200\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3009/api/tarefas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3009",
+					"path": [
+						"api",
+						"tarefas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar uma tarefa atráves do seu id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "940ba45c-957d-432e-b9eb-fb07f74c03b5",
+						"exec": [
+							"tests[\"Status code retornado foi 200\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3009/api/tarefas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3009",
+					"path": [
+						"api",
+						"tarefas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
