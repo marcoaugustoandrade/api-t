@@ -4,6 +4,7 @@ require('dotenv').config()
 const port = process.env.PORT
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 // const fs = require('fs')
 // const path = require('path')
 
@@ -15,7 +16,7 @@ app.use(bodyParser.urlencoded( {extended: true} ));
 // const logFile = fs.createWriteStream(path.join(__dirname, '../access.log'), { flags: 'a' })
 // app.use(morgan('dev', { stream: logFile }))
 app.use(morgan('dev'))
-// app.use(cors());
+app.use(cors());
 
 
 // Rotas
