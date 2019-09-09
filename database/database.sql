@@ -1,3 +1,4 @@
+create database if not exists db_tarefas;
 use db_tarefas;
 
 create table categorias(

@@ -6,7 +6,7 @@ exports.listar = (req, res) => {
   let descricao = req.query.f || ""
   descricao = "%" + descricao + "%"
 
-  const query = 'select * from tarefas where descricao like ?'
+  const query = 'select t.id, t.descricao, t.datahorario, t.realizado, c.descricao as categoria from tarefas t, categorias c where t.categoria_id = c.id and t.descricao like ?'
 
   conexao.query(query, [descricao], (err, rows) => {
     if (err){
