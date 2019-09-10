@@ -1,15 +1,16 @@
 const conexao = require('../config/conexao')
-const { check, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 exports.listar = (req, res) => {
   
   let descricao = req.query.f || ""
   descricao = "%" + descricao + "%"
 
-  const query = 'select t.id, t.descricao, t.datahorario, t.realizado, c.descricao as categoria from tarefas t, categorias c where t.categoria_id = c.id and t.descricao like ?'
+  const query = 'select t.id, t.descricao, t.data, t.realizado, c.descricao as categoria, c.cor from tarefas t, categorias c where t.categoria_id = c.id and t.descricao like ?'
 
   conexao.query(query, [descricao], (err, rows) => {
     if (err){
+      console.log(err)
       res.status(500)
       res.json({"message": "Internal Server Error"})
     } else if (rows.length > 0){
@@ -35,6 +36,7 @@ exports.listarPorId = (req, res) => {
 
     conexao.query(query, [id], (err, rows) => {
       if (err){
+        console.log(err)
         res.status(500)
         res.json({"message": "Internal Server Error"})
       } else if (rows.length > 0){
@@ -57,14 +59,15 @@ exports.inserir = (req, res) => {
     
     const tarefa = {}
     tarefa.descricao = req.body.descricao
-    tarefa.datahorario = req.body.datahorario
+    tarefa.data = req.body.data
     tarefa.realizado = req.body.realizado
     tarefa.categoria_id = req.body.categoria_id
     
-    const query = 'insert into tarefas (descricao, datahorario, realizado, categoria_id) values (?, ?, ?, ?)'
+    const query = 'insert into tarefas (descricao, data, realizado, categoria_id) values (?, ?, ?, ?)'
     
-    conexao.query(query, [tarefa.descricao, tarefa.datahorario, tarefa.realizado, tarefa.categoria_id], (err, result) => {
+    conexao.query(query, [tarefa.descricao, tarefa.data, tarefa.realizado, tarefa.categoria_id], (err, result) => {
       if (err){
+        console.log(err)
         res.status(500)
         res.json({"message": "Internal Server Error"})
       } else {
@@ -85,14 +88,15 @@ exports.alterar = (req, res) => {
     const tarefa = {}
     tarefa.id = req.params.id
     tarefa.descricao = req.body.descricao
-    tarefa.datahorario = req.body.datahorario
+    tarefa.data = req.body.data
     tarefa.realizado = req.body.realizado
     tarefa.categoria_id = req.body.categoria_id
 
-    const query = 'update tarefas set descricao = ?, datahorario = ?, realizado = ?, categoria_id = ? where id = ?'
+    const query = 'update tarefas set descricao = ?, data = ?, realizado = ?, categoria_id = ? where id = ?'
 
-    conexao.query(query, [tarefa.descricao, tarefa.datahorario, tarefa.realizado, tarefa.realizado, tarefa.id], (err, result) => {
+    conexao.query(query, [tarefa.descricao, tarefa.data, tarefa.realizado, tarefa.realizado, tarefa.id], (err, result) => {
       if (err){
+        console.log(err)
         res.status(500)
         res.json({"message": "Internal Server Error"})
       } else if (result.affectedRows > 0){
@@ -119,6 +123,7 @@ exports.deletar = (req, res) => {
 
     conexao.query(query, [id], (err, result) => {
       if (err){
+        console.log(err)
         res.status(500)
         res.json({"message": "Internal Server Error"})
       } else if (result.affectedRows > 0){

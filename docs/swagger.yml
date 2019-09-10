@@ -299,28 +299,31 @@ components:
     
     Categoria:
       required:
-      - descricao
       - id
+      - descricao
+      - cor
       type: object
       properties:
         id:
           type: integer
         descricao:
+          type: string
+        cor:
           type: string
     
     Tarefa:
       required:
-      - categoria_id
-      - datahorario
-      - descricao
       - id
+      - descricao
+      - data
+      - categoria_id
       type: object
       properties:
         id:
           type: integer
         descricao:
           type: string
-        datahorario:
+        data:
           type: string
         realizado:
           type: boolean

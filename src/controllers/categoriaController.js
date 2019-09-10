@@ -1,5 +1,5 @@
 const conexao = require('../config/conexao')
-const { check, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 exports.listar = (req, res) => {
   
@@ -7,6 +7,7 @@ exports.listar = (req, res) => {
 
   conexao.query(query, (err, rows) => {
     if (err){
+      console.log(err)
       res.status(500)
       res.json({"message": "Internal Server Error"})
     } else if (rows.length > 0){
@@ -31,6 +32,7 @@ exports.listarPorId = (req, res) => {
 
     conexao.query(query, [id], (err, rows) => {
       if (err){
+        console.log(err)
         res.status(500)
         res.json({"message": "Internal Server Error"})
       } else if (rows.length > 0){
@@ -58,6 +60,7 @@ exports.inserir = (req, res) => {
 
     conexao.query(query, [categoria.descricao], (err, result) => {
       if (err){
+        console.log(err)
         res.status(500)
         res.json({"message": "Internal Server Error"})
       } else {
@@ -83,6 +86,7 @@ exports.alterar = (req, res) => {
 
     conexao.query(query, [categoria.descricao, categoria.id], (err, result) => {
       if (err){
+        console.log(err)
         res.status(500)
         res.json({"message": "Internal Server Error"})
       } else if (result.affectedRows > 0){
@@ -109,6 +113,7 @@ exports.deletar = (req, res) => {
 
     conexao.query(query, [id], (err, result) => {
       if (err){
+        console.log(err)
         res.status(500)
         res.json({"message": "Internal Server Error"})
       } else if (result.affectedRows > 0){
