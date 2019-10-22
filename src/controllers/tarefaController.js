@@ -107,6 +107,7 @@ exports.alterar = (req, res) => {
         res.json({"message": "Tarefa não encontrada"})
       }
     })
+    conexao.end()
   }
 }
 
